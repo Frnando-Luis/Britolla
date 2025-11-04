@@ -9,9 +9,11 @@ class Pot {
     const int interAmostra = 2500;
     float xn1;
     float yn1;
+    float zn1;
     unsigned long ultInter;
     float xn;
     float yn;
+    float zn;
 
   public:
     Pot(int pin);
