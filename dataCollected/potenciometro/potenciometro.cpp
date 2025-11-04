@@ -6,6 +6,7 @@ Pot::Pot(int pin) {
   this->pino = pin;
   this->xn1 = 0;
   this->yn1 = 0;
+  this->zn1 = 0;
   this->ultInter = 0;
 
 }
@@ -15,6 +16,7 @@ void Pot::setAngRef() {
   this->angRef = xn * 270; // depende da calibração real
   xn1 = xn;
   yn1 = angRef;
+  zn1 = angRef;
   Serial.print("Este é o ângulo de Referencia:");
   Serial.println(angRef);
 }
@@ -24,8 +26,10 @@ int Pot::leitura() {
   if (now - ultInter >= interAmostra) {
     xn = analogRead(pino) / 1023.0; 
     yn = 0.072821 * xn + 0.072821 * xn1 + 0.854359 * yn1;
+    zn = 0.072821 * xn + 0.072821 * xn1 + 0.854359 * zn1;
     yn1 = yn;
     xn1 = xn;
+    zn1 = zn;
     ultInter = now;
     int angulo = 270 * yn;
     if(angulo > angRef){ 
