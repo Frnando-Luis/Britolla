@@ -3,7 +3,7 @@
 
 Pot pot1(A0);
 Pot pot2(A1);
-Pot pot3(A2);
+Pot pot3(A2); # Verificar se esse pino tá livre no arduino
 
 // Variáveis para guardar a última posição (x,y,z) que foi impressa.
 // Iniciamos com um valor que provavelmente será diferente do primeiro cálculo.
@@ -12,6 +12,7 @@ float ultimoY = -999.0;
 float ultimoZ = -999.0;
 
 int L = 14;
+short d = 1;
 
 // (Opcional, mas recomendado) Define uma pequena tolerância.
 // O valor só será impresso se a mudança for maior que este valor.
@@ -38,9 +39,9 @@ void loop() {
   float rad2 = pot2.angulo(ang2);
   float rad3 = pot3.angulo(ang2);
 
-  float x = L * (cos(rad1) + cos(rad1 + rad2));
-  float y = L * (sin(rad1) + sin(rad1 + rad2));
-  float z = 0;
+  float x = L * ((cos(rad1)*cos(rad2)) + (cos(rad1)*cos(rad2)*cos(rad3)-cos(rad1)*sin(rad2)*sin(rad3)));
+  float y = L * ((sin(rad1)*cos(rad2)) + (cos(rad1)*cos(rad2)*cos(rad3)-sin(rad1)*sin(rad2)*sin(rad3)));
+  float z = L * ((sin(rad2))+(sin(rad2)*cos(rad3)+cos(rad2)*sin(rad3))) + d;
 
   // 2. A CONDIÇÃO é aplicada aqui, ANTES de imprimir.
   // Comparamos o valor recém-calculado de 'x', 'y' e 'z' com o último que foi impresso.
