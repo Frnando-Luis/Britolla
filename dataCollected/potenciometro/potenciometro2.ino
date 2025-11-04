@@ -39,9 +39,15 @@ void loop() {
   float rad2 = pot2.angulo(ang2);
   float rad3 = pot3.angulo(ang2);
 
-  float x = L * ((cos(rad1)*cos(rad2)) + (cos(rad1)*cos(rad2)*cos(rad3)-cos(rad1)*sin(rad2)*sin(rad3)));
-  float y = L * ((sin(rad1)*cos(rad2)) + (cos(rad1)*cos(rad2)*cos(rad3)-sin(rad1)*sin(rad2)*sin(rad3)));
-  float z = L * ((sin(rad2))+(sin(rad2)*cos(rad3)+cos(rad2)*sin(rad3))) + d;
+  // (Cálculo original)
+  // float x = L * ((cos(rad1)*cos(rad2)) + (cos(rad1)*cos(rad2)*cos(rad3)-cos(rad1)*sin(rad2)*sin(rad3)));
+  // float y = L * ((sin(rad1)*cos(rad2)) + (sin(rad1)*cos(rad2)*cos(rad3)-sin(rad1)*sin(rad2)*sin(rad3)));
+  // float z = L * ((sin(rad2))+(sin(rad2)*cos(rad3)+cos(rad2)*sin(rad3))) + d;
+
+  // (Sugestão do deepseek) Usando identidades trigonométricas
+  float x = L * cos(rad1) * (cos(rad2) + cos(rad2 + rad3));
+  float y = L * sin(rad1) * (cos(rad2) + cos(rad2 + rad3));
+  float z = L * (sin(rad2) + sin(rad2 + rad3)) + d;
 
   // 2. A CONDIÇÃO é aplicada aqui, ANTES de imprimir.
   // Comparamos o valor recém-calculado de 'x', 'y' e 'z' com o último que foi impresso.
