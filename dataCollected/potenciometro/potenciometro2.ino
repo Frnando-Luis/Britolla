@@ -40,7 +40,7 @@ void loop() {
 
   float x = L * (cos(rad1) + cos(rad1 + rad2));
   float y = L * (sin(rad1) + sin(rad1 + rad2));
-  float z = 
+  float z = 0;
 
   // 2. A CONDIÇÃO é aplicada aqui, ANTES de imprimir.
   // Comparamos o valor recém-calculado de 'x', 'y' e 'z' com o último que foi impresso.
